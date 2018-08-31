@@ -25,6 +25,7 @@ gc.collect()
 # attemp to loging
 
 if sta_if.isconnected():
+    # we are good to go
     webrepl.start()
 else:
     # machine.reset()
