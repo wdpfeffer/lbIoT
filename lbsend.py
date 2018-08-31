@@ -4,6 +4,8 @@ import utime
 import ubinascii
 # import esp
 
+
+# setup pins for reading state of litterbox
 p4 = Pin(4, Pin.IN)
 p5 = Pin(5, Pin.OUT)
 p13 = Pin(13, Pin.OUT)
@@ -27,4 +29,3 @@ def readLB():
     p5.off()
     utime.sleep(1)
     return txt
-    
