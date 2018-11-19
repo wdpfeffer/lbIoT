@@ -10,6 +10,7 @@ sta_if = network.WLAN(network.STA_IF)
 ap_if = network.WLAN(network.AP_IF)
 sta_if.active(True)
 ap_if.active(False)
+sta_if.ifconfig(('192.168.1.210','255.255.255.0','192.168.1.1','8.8.8.8'))
 sta_if.connect('1-FBIsurveillance', 'tInKtHEGoAt06')
 loopCount = 0
 while loopCount < 10:
