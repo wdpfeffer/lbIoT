@@ -1,11 +1,15 @@
-import machine
-pins = [machine.Pin(i, machine.Pin.IN) for i in (0, 2, 4, 5, 12, 13, 14, 15)]
+import lbsend as lb
+
+
 
 html = """<!DOCTYPE html>
 <html>
-    <head> <title>ESP8266 Pins</title> </head>
-    <body> <h1>ESP8266 Pins</h1>
-        <table border="1"> <tr><th>Pin</th><th>Value</th></tr> %s </table>
+    <head> <title>Basement Litterbox</title> </head>
+    <body> <h1>Status</h1>
+        <table border="1">
+            <tr><th>ID</th><th>Status</th><th>Depth</th></tr>
+            %s
+        </table>
     </body>
 </html>
 """
@@ -27,7 +31,8 @@ while True:
         line = cl_file.readline()
         if not line or line == b'\r\n':
             break
-    rows = ['<tr><td>%s</td><td>%d</td></tr>' % (str(p), p.value()) for p in pins]
-    response = html % '\n'.join(rows)
+    lbdata=lb.readLB().split(',')
+    drow='<tr><td>%s</td><td>%s</td><td>%s</td>' % (lbdata[0],str(lbdata[1]),str(lbdata[2]))
+    response = html % drow
     cl.send(response)
     cl.close()
