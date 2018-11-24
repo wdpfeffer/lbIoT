@@ -1,7 +1,5 @@
 import lbsend as lb
 
-
-
 html = """<!DOCTYPE html>
 <html>
     <head> <title>Basement Litterbox</title> </head>
@@ -31,7 +29,8 @@ while True:
         line = cl_file.readline()
         if not line or line == b'\r\n':
             break
-    lbdata=lb.readLB().split(',')
+    lbdata = lb.readLB()
+    lbdata = lbdata.split(',')
     drow='<tr><td>%s</td><td>%s</td><td>%s</td>' % (lbdata[0],str(lbdata[1]),str(lbdata[2]))
     response = html % drow
     cl.send(response)
