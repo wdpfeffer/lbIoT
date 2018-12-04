@@ -27,6 +27,8 @@ gc.collect()
 
 if sta_if.isconnected():
     webrepl.start()
+    utime.sleep(1)
+    import SimHTTPSer
 else:
     # machine.reset()
     print("not connected")
