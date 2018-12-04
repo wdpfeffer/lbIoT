@@ -6,9 +6,12 @@ html = """<!DOCTYPE html>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <body> <h1>Status</h1>
         <table class="table">
-            <tr class="table-primary"><th>ID</th><th>Status</th><th>Depth</th></tr>
+            <tr"><th>ID</th><th>Status</th></tr>
             %s
         </table>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="340" aria-valuemax="660">%s</div>
+        </div>
     </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -35,7 +38,7 @@ while True:
             break
     lbdata = lb.readLB()
     lbdata = lbdata.split(',')
-    drow='<tr><td>%s</td><td>%s</td><td>%s</td>' % (lbdata[0],str(lbdata[1]),str(lbdata[2]))
-    response = html % drow
+    drow='<tr><td>%s</td><td>%s</td>' % (lbdata[0],str(lbdata[1]))
+    response = html % (drow, str(lbdata[2]))
     cl.send(response)
     cl.close()
