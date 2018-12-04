@@ -1,21 +1,17 @@
 import lbsend as lb
+import math
 
 html = """<!DOCTYPE html>
 <html>
-    <head> <title>Basement Litterbox</title> </head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <body> <h1>Status</h1>
-        <table class="table">
-            <tr"><th>ID</th><th>Status</th></tr>
+    <head> <title>Basement Litterbox</title>
+    </head>    
+    <body>
+     <h1>Status</h1>
+      <table border="1">
+            <tr><th>ID</th><th>Status</th><th>Level</th></tr>
             %s
-        </table>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="340" aria-valuemax="660">%s</div>
-        </div>
+      </table>
     </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>
 """
 
@@ -38,7 +34,9 @@ while True:
             break
     lbdata = lb.readLB()
     lbdata = lbdata.split(',')
-    drow='<tr><td>%s</td><td>%s</td>' % (lbdata[0],str(lbdata[1]))
-    response = html % (drow, str(lbdata[2]))
+    # lblevel = round((int(lbdata[2])-340)/(660-340)*100,0)
+    drow='<tr><td>%s</td><td>%s</td><td>%s</td></tr>' % (lbdata[0], str(lbdata[1]), str(lbdata[2]))
+    response = html % drow
+    # response = html % (drow, str(lblevel), str(lblevel)+"%")
     cl.send(response)
     cl.close()
