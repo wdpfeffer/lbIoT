@@ -1,5 +1,5 @@
 import lbsend as lb
-import math
+import machine
 
 html = """<!DOCTYPE html>
 <html>
@@ -40,3 +40,6 @@ while True:
     # response = html % (drow, str(lblevel), str(lblevel)+"%")
     cl.send(response)
     cl.close()
+
+#if we get here, should reset
+machine.reset()
